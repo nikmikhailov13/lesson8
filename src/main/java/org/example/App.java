@@ -9,65 +9,51 @@ import org.example.Computer.OperatingSystem;
  */
 public class App {
 
-  public static void main(String[] args) {
+  private static int M = 3;
+  private static int N = 3;
 
-    Computer computer = new Computer(16, 4, "Acer", OperatingSystem.Windows);
-    System.out.println(computer);
-
-    Computer computer1 = Computer.builder()
-        .ram(16)
-        .cores(4)
-        .name("Lenovo")
-        .operatingSystem(OperatingSystem.Linux)
-        .number()
-        .build();
-
-    System.out.println(computer1);
-
-    int[] arr = new int[10];
-
-    Random intRandomizer = new Random();
-
-    int sum = 0;
-
-    for (int i = 0; i < arr.length; i++) {
-      arr[i] = intRandomizer.nextInt(2);
-
-      sum = sum + arr[i];
-
+  public static void printMatrix(int[][] matrix) {
+    for (int i = 0; i < M; i++) {
+      for (int j = 0; j < N; j++) {
+        System.out.printf("%3d", matrix[i][j]);
+      }
+      System.out.println();
     }
-
-    int result = 0;
-
-    if (arr.length > 0) {
-      result = sum / arr.length;
-    }
-
-    System.out.println(Arrays.toString(arr));
-    System.out.println(result);
-
-    System.out.println(Arrays.toString(deleteElement(arr, 1)));
   }
 
-  public static int[] deleteElement(int[] arr, int number) {
-    int count = 0;
+  public static int[][] generateMatrix() {
+    int[][] matrix = new int[M][N];
+    Random random = new Random();
+    for (int i = 0; i < M; i++) {
+      for (int j = 0; j < N; j++) {
+        matrix[i][j] = random.nextInt(0, 10);
+      }
+    }
+    return matrix;
+  }
 
-    for (int i = 0; i < arr.length; i++) {
-      if (arr[i] == number) {
-        count++;
+  public static void transpose(int[][] matrix) {
+
+    for(int i = 0; i < M; i++) {
+      for(int j = i + 1; j < N; j++){
+        int tmp = matrix[i][j];
+        matrix[i][j] = matrix[j][i];
+        matrix[j][i] = tmp;
       }
     }
 
-    int[] result = new int[arr.length - count];
 
-    for (int i = 0, j = 0; i < arr.length; i++) {
-      if (arr[i] != number) {
-        result[j] = arr[i];
-        j++;
-      }
-    }
 
-    return result;
+  }
+
+  public static void main(String[] args) {
+
+    int[][] matrix = generateMatrix();
+    printMatrix(matrix);
+    transpose(matrix);
+    System.out.println("-------------------------");
+    printMatrix(matrix);
+
   }
 
 }
