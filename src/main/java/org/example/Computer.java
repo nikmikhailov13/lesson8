@@ -4,10 +4,34 @@ import java.util.UUID;
 
 public class Computer {
   private int ram;
+  private int currentRamSockets = 1;
   private int cores;
   private String name;
   private UUID number;
   private OperatingSystem operatingSystem;
+
+
+
+  public void addRam(int newRam) {
+    if(currentRamSockets > 3) throw new IllegalArgumentException("This computer cannot have more than 4 planks of ram");
+    this.ram += newRam;
+    currentRamSockets++;
+  }
+
+  public String load() {
+    if(operatingSystem == null) throw new IllegalArgumentException("Computer can't load without operating system");
+    return operatingSystem + " is loading...";
+  }
+
+
+  public String runProgram(String program) {
+      if(ram < 4 || cores < 2) {
+        throw new IllegalArgumentException("The specification of computer is to low to run the program " + program);
+      }
+      return program + " is running.";
+  }
+
+
 
   public Computer(int ram, int cores, String name, OperatingSystem operatingSystem) {
     this.ram = ram;
@@ -15,6 +39,30 @@ public class Computer {
     this.name = name;
     this.operatingSystem = operatingSystem;
     this.number = UUID.randomUUID();
+  }
+
+  public int getRam() {
+    return ram;
+  }
+
+  public int getCurrentRamSockets() {
+    return currentRamSockets;
+  }
+
+  public int getCores() {
+    return cores;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public UUID getNumber() {
+    return number;
+  }
+
+  public OperatingSystem getOperatingSystem() {
+    return operatingSystem;
   }
 
   public static ComputerBuilder builder() {
