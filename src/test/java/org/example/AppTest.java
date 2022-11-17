@@ -33,6 +33,22 @@ public class AppTest
      */
     public void testApp()
     {
-        assertTrue( true );
+
+        Computer pc = new Computer(16, 4, "Acer", Computer.OperatingSystem.Windows);
+
+        //shouldOn
+        pc.turnOn();
+        assertEquals(true, pc.isOn());
+
+        //shouldStartGame
+        pc.runMyFavoriteGame();
+        assertEquals(true, pc.isFreeze());
+
+        //shouldOff
+        pc.shutdown();
+        assertEquals(false, pc.isOn());
+
     }
+
+
 }
