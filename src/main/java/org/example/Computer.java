@@ -9,6 +9,10 @@ public class Computer {
   private UUID number;
   private OperatingSystem operatingSystem;
 
+  private boolean freeze = false;
+  private boolean isOn = false;
+
+
   public Computer(int ram, int cores, String name, OperatingSystem operatingSystem) {
     this.ram = ram;
     this.cores = cores;
@@ -73,6 +77,35 @@ public class Computer {
     public Computer build() {
       return new Computer(ram, cores, name, operatingSystem);
     }
+  }
+
+  public void turnOn (){
+    this.isOn = true;
+    this.freeze = false;
+  }
+
+  public void shutdown (){
+    this.isOn = false;
+    this.freeze = false;
+  }
+
+  public boolean isOn() {
+    return isOn;
+  }
+
+  public void runMyFavoriteGame(){
+
+    if(!this.isOn()){
+      this.turnOn();
+    }
+
+    //good game well play
+    this.freeze = true;
+
+  }
+
+  public boolean isFreeze() {
+    return freeze;
   }
 
 }
